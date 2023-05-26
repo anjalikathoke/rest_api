@@ -4,10 +4,10 @@ use App\Models\Order;
 use App\Events\SuccessOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\ProductImageController;
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +44,26 @@ Route::delete('product/delete-image/{id}',[ProductController::class,'delete_prod
 
 Route::get('get-product-visits/{id}',[ProductController::class,'get_product_visits']);
 Route::get('get-product-price/{id}',[ProductController::class,'get_product_price']);
+
+
+Route::controller(AuthController::class)->group(function()
+{
+    Route::post('register','register');
+    Route::post('login', 'login');
+});
+
+/*Route::middleware('jwt.auth')->post('/logout', function (Request $request) {
+    return $request->user();
+});*/
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('get-user', [AuthController::class, 'getUser']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('edit-profile', [AuthController::class, 'edit_profile']);
+    Route::post('change-password', [AuthController::class, 'change_password']);
+});
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

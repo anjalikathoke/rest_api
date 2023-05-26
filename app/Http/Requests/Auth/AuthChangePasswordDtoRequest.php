@@ -5,7 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthDtoRequest extends FormRequest
+class AuthChangePasswordDtoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class AuthDtoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'old_password' => ["required"],
             'password' => 'required',
+            'c_password' => 'required|same:password',
         ];
     }
 
@@ -36,9 +37,7 @@ class AuthDtoRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Please enter name.',
-            'email.required' => 'Please enter email',
-            'email.email' => 'Please enter valid email.',
+            'old_password.required' => 'Please enter old password.',
             'password.required' => 'Please enter password.',
             'c_password.required' => 'Please enter confirm password.',
             'c_password.same' => 'Password not matched with confirm password.',

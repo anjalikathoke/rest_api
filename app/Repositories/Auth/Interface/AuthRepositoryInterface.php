@@ -2,12 +2,15 @@
 
 namespace App\Repositories\Auth\Interface;
 
-use App\Http\Requests\Auth\AuthDtoRequest;
+
+use App\Http\Requests\Auth\AuthRegisterDtoRequest;
 
 interface AuthRepositoryInterface
 {
-    public function add(AuthDtoRequest $data);
+    public function add(AuthRegisterDtoRequest $data);
 
-    public function update(AuthDtoRequest $data, int $id);
+    public function update(AuthRegisterDtoRequest $data);
+
+    public function changePassword(Array $data);
 
 }

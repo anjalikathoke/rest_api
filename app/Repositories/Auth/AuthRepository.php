@@ -4,8 +4,11 @@ namespace App\Repositories\Auth;
 
 use Exception;
 use App\Models\User;
-use App\Http\Requests\Auth\AuthDtoRequest;
-use App\Repositories\Customer\Interface\AuthRepositoryInterface;
+
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Requests\Auth\AuthRegisterDtoRequest;
+use App\Repositories\Auth\Interface\AuthRepositoryInterface;
+
 
 class AuthRepository implements AuthRepositoryInterface
 {
@@ -13,11 +16,11 @@ class AuthRepository implements AuthRepositoryInterface
     /**
      * Add a single record in the table
      *
-     * @param AuthDtoRequest $data
+     * @param AuthRegisterDtoRequest $data
      *
      * @return Array
      */
-    public function add(AuthDtoRequest $data){
+    public function add(AuthRegisterDtoRequest $data){
 
        // dd($data->toArray());
           try{
@@ -29,23 +32,54 @@ class AuthRepository implements AuthRepositoryInterface
 
     /**
      * Update a Customer
-     * @param AuthDtoRequest $data
+     * @param AuthRegisterDtoRequest $data
      *
      * @param int $id
      *
      * @return Array
      */
-    public function update(AuthDtoRequest $data, int $id)
+    public function update(AuthRegisterDtoRequest $data)
     {
-        if (empty($data) || empty($id)) {
+        if (empty($data)) {
             throw new Exception;
         }
 
-        $customer = User::find($id);
+        $user = JWTAuth::user();
+        if (empty($user)) {
+            throw new Exception;
+        }
 
-        $customer->update($data->toArray());
+        try{
+            $user->update($data->toArray());
+            return $user;
+        }catch(Exception $e){
+            throw $e;
+        }
+    }
 
-        return $customer;
+     /**
+     * change Password
+     *
+     * @param Array $data
+     *
+     * @return Array
+     */
+    public function changePassword(Array $data)
+    {
+        if (empty($data)) {
+            throw new Exception;
+        }
+
+        $user = JWTAuth::user();
+        if (empty($user)) {
+            throw new Exception;
+        }
+
+        try{
+            return $user->update($data);
+        }catch(Exception $e){
+            throw $e;
+        }
     }
 
 }

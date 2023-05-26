@@ -1,13 +1,20 @@
 <?php
 namespace App\Services\Auth;
+use Exception;
+use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Resources\User\UserResource;
 use App\Repositories\Auth\AuthRepository;
-use Tymon\JWTAuthExceptions\JWTException;
-use App\Http\Requests\Auth\LogoutDtoRequest;
-
+use App\Http\Requests\Auth\AuthDtoRequest;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Requests\Auth\AuthRegisterDtoRequest;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use App\Http\Requests\Auth\AuthChangePasswordDtoRequest;
 
 class AuthService
 {
+    protected $repository;
+
     /**
      * Constructor based dependency injection
      *
@@ -15,22 +22,22 @@ class AuthService
      *
      * @return void
      */
-    public function __construct(protected AuthRepository $repository)
+    public function __construct(AuthRepository $repository)
     {
-
+        $this->repository = $repository;
     }
 
 
     /**
      * create function
      *
-     * @param CustomerDtoRequest $data
+     * @param AuthRegisterDtoRequest $data
      * @return array
      */
-    public function create(AuthDtoRequest $data){
+    public function create(AuthRegisterDtoRequest $data){
         try{
-            $data->merge(['password' => bcrypt($data->password]);
-            return new CustomerResource(
+            $data->merge(['password' => bcrypt($data->password)]);
+            return new UserResource(
                 $this->repository->add($data)
             );
         }catch(Exception $e){
@@ -42,42 +49,27 @@ class AuthService
     /**
      * login function
      *
-     * @param CustomerDtoRequest $data
+     * @param AuthDtoRequest $data
      * @return array
      */
     public function login(AuthDtoRequest $data){
-        $input = $data->only('email', 'password');
-        $jwt_token = null;
+       // try{
+            $input = $data->only('email', 'password');
+            $jwt_token = null;
+            $expire = \Carbon\Carbon::now()->addDays(7)->timestamp;
 
-        if (!$jwt_token = JWTAuth::attempt($input)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], Response::HTTP_UNAUTHORIZED);
-        }
-
-        return response()->json([
-            'success' => true,
-            'token' => $jwt_token,
-        ]);
-    }
-
-    /**
-     * update function
-     *
-     * @param CustomerDtoRequest $data
-     * @param int $id
-     * @return array
-     */
-    public function update(AuthDtoRequest $data, int $id){
-
-        try{
-            return new CustomerResource(
-                $this->repository->update($data,$id)
-            );
-        }catch(Exception $e){
+            if ($jwt_token = JWTAuth::attempt($input, ['exp' => $expire] )) {
+                return [
+                    'token' => $jwt_token,
+                    'token_type' => 'bearer',
+                    'expires_in' => $expire
+                ];
+            }else{
+                throw new Exception ;
+            }
+       /* }catch(TokenInvalidException $e){
             throw $e;
-        }
+        }*/
     }
 
     /**
@@ -87,36 +79,85 @@ class AuthService
      *
      * @return array
      */
-    public function getUser(LogoutDtoRequest $data)
+    public function getUser()
     {
-        try{
-            $user = JWTAuth::authenticate($data->token);
+        try {
+            return new UserResource( JWTAuth::parseToken()->authenticate());
+        } catch (JWTException $e) {
+            return $e;
+        }
+    }
 
-            return response()->json(['user' => $user]);
-        }catch(\Exception $e){
+    /**
+     * logout action
+     *
+     * @return array
+     */
+    public function logout()
+    {
+        // get token
+        if(JWTAuth::getToken()){
+            throw new JWTException ;
+        }
+
+        try {
+            return JWTAuth::parseToken()->invalidate();
+        }catch(Exception $e){
             throw $e;
         }
     }
 
     /**
-     * delete by id
+     * refresh token action
      *
      * @return array
      */
-    public function logout(LogoutDtoRequest $data)
+    public function refresh()
     {
         try {
-            JWTAuth::invalidate($data->token);
+            return JWTAuth::refresh();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'User logged out successfully'
-            ]);
-        } catch (JWTException $exception) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Sorry, the user cannot be logged out'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }catch(TokenInvalidException $e){
+            throw $e;
+        }
+    }
+
+    /**
+     * edit profile function
+     *
+     * @param AuthRegisterDtoRequest $data
+     * @param int $id
+     * @return array
+     */
+    public function update(AuthRegisterDtoRequest $data){
+
+        try{
+            return  new UserResource($this->repository->update($data));
+        }catch(Exception $e){
+            throw $e;
+        }
+    }
+
+    /**
+     * change password function
+     *
+     * @param AuthChangePasswordDtoRequest $data
+     * @param int $id
+     * @return array
+     */
+    public function changePassword(AuthChangePasswordDtoRequest $data){
+
+        try{
+
+            $data = ['password' => bcrypt($data->password)];
+
+            if($this->repository->changePassword($data)){
+               // return JWTAuth::refresh();
+               return true;
+            }
+
+        }catch(Exception $e){
+            throw $e;
         }
     }
 

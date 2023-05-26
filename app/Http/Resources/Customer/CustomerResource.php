@@ -4,7 +4,6 @@ namespace App\Http\Resources\Customer;
 
 
 use Illuminate\Http\Request;
-use App\Http\Resources\Order\OrderResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerResource extends JsonResource

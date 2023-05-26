@@ -5,7 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LogoutDtoRequest extends FormRequest
+class AuthRegisterDtoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,11 @@ class LogoutDtoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => 'required',
+            'name' => 'required',
+            'email' => 'required_without|email',
+            // 'password' => ['required', Password::defaults()],
+            'password' => 'required_without',
+            'c_password' => 'required_without|same:password',
         ];
     }
 
@@ -35,7 +39,13 @@ class LogoutDtoRequest extends FormRequest
     public function messages()
     {
         return [
-            'token.required' => 'Please provide token.',
+            'name.required' => 'Please enter name.',
+            'email.required_without' => 'Please enter email',
+            'email.email' => 'Please enter valid email.',
+            'password.required_without' => 'Please enter password.',
+            'c_password.required_without' => 'Please enter confirm password.',
+            'c_password.same' => 'Password not matched with confirm password.',
+
         ];
     }
 }
