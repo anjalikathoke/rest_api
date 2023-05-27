@@ -10,6 +10,7 @@ use App\Services\Auth\AuthService;
 use Tymon\JWTAuthExceptions\JWTException;
 use App\Http\Requests\Auth\AuthDtoRequest;
 use App\Http\Requests\Auth\LogoutDtoRequest;
+use App\Http\Requests\Auth\AuthUpdateDtoRequest;
 use App\Http\Requests\Auth\AuthRegisterDtoRequest;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Http\Requests\Auth\AuthChangePasswordDtoRequest;
@@ -108,7 +109,7 @@ class AuthController extends Controller
         return response()->json($result);
     }
 
-    public function edit_profile(AuthRegisterDtoRequest $request)
+    public function edit_profile(AuthUpdateDtoRequest $request)
     {
         $data = null;
         $status = 'success';

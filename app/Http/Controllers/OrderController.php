@@ -119,6 +119,8 @@ class OrderController extends Controller
      */
     public function update_status(OrderStatusDtoRequest $request,int $id)
     {
+        $this->authorize('create-delete-products');
+
         $status = 'success';
         $data = Null;
 
@@ -142,6 +144,8 @@ class OrderController extends Controller
      */
     public function update_shipping_date(OrderShippingDateDtoRequest $request,int $id)
     {
+        $this->authorize('create-delete-products');
+
         $status = 'success';
         $data = Null;
 

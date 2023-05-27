@@ -5,6 +5,7 @@ namespace App\Services\Product;
 use Exception;
 
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Product\ImageDtoRequest;
 use App\Http\Resources\Product\ProductResource;
@@ -115,15 +116,37 @@ class ProductService
                 $fileName = $file->hashName();
 
                //$folderPath= Storage::disk('public_products');
-               $folderPath= Storage::disk('s3_images');
+               $folderPath = Storage::disk('s3_images');
 
                //store main image
                Storage::disk('s3_images')->put($fileName, File::get($file));
 
-
                 //get file url
                 if($fileUrl = $folderPath->url($fileName)){
                     $extraDetails['productImage'] = $fileUrl;
+
+                    // Generate a thumbnail image (small) file name with extension
+                    $fileNameSmall = 'small_'.$file->hashName();
+
+                    // Generate a thumbnail image (medium) file name with extension
+                    $fileNameMedium = 'medium_'.$file->hashName();
+
+                    //store thumbnail image image
+                    $imageSmall = Image::make($file->path())->resize(200, 200, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+
+                    //store and get small thumb file url
+                    Storage::disk('s3_thumbnail_images')->put($fileNameSmall, $imageSmall->stream());
+                    //$smallFileUrl = Storage::disk('s3_thumbnail_images')->url($fileNameSmall);
+
+                    $imageMedium = Image::make($file->path())->resize(400, 200, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+
+                    //store and get medium thumb file url
+                    Storage::disk('s3_thumbnail_images')->put($fileNameMedium, $imageMedium->stream());
+                    //$mediumFileUrl = Storage::disk('s3_thumbnail_images')->url($fileNameMedium);
                 }
             }
 
@@ -166,6 +189,29 @@ class ProductService
                     $extraDetails['productImage'] = $fileUrl;
 
                     $data = $data->merge($extraDetails);
+
+                    // Generate a thumbnail image (small) file name with extension
+                    $fileNameSmall = 'small_'.$file->hashName();
+
+                    // Generate a thumbnail image (medium) file name with extension
+                    $fileNameMedium = 'medium_'.$file->hashName();
+
+                     //store thumbnail image image
+                    $imageSmall = Image::make($file->path())->resize(200, 200, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+
+                    //store and get small thumb file url
+                    Storage::disk('s3_thumbnail_images')->put($fileNameSmall, $imageSmall->stream());
+                    //$smallFileUrl = Storage::disk('s3_thumbnail_images')->url($fileNameSmall);
+
+                    $imageMedium = Image::make($file->path())->resize(400, 200, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+
+                    //store and get medium thumb file url
+                    Storage::disk('s3_thumbnail_images')->put($fileNameMedium, $imageMedium->stream());
+                    //$mediumFileUrl = Storage::disk('s3_thumbnail_images')->url($fileNameMedium);
                 }
             }
 

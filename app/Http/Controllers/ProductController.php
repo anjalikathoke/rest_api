@@ -108,6 +108,7 @@ class ProductController extends Controller
      */
     public function store(ProductDtoRequest $request)
     {
+        $this->authorize('create-delete-products');
         $status = 'success';
         $data = Null;
 
@@ -154,57 +155,13 @@ class ProductController extends Controller
      */
     public function destroy(int $id)
     {
+        $this->authorize('create-delete-products');
+
         $status = 'success';
         $data = Null;
 
         try{
             $data = $this->service->delete($id);
-        }catch(Exception $e){
-            throw $e;
-        }
-
-        $result = array('status' => $status,'data'=>$data);
-        return response()->json($result);
-    }
-
-    /**
-     * Store a newly created product resource in storage.
-     * @param ImageDtoRequest $data
-     * @return array
-     */
-    public function add_product_image(ImageDtoRequest $request)
-    {
-        $status = 'success';
-        $data = Null;
-
-        try{
-            $data = $this->service->addProductImage(
-                data:$request
-            );
-        }catch(Exception $e){
-            throw $e;
-        }
-
-        $result = array('status' => $status,'data'=>$data);
-        return response()->json($result);
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     * @param ImageDtoRequest $data
-     * @param int $id
-     * @return array
-     */
-    public function update_product_image(ImageDtoRequest $request)
-    {
-        $status = 'success';
-        $data = Null;
-
-        try{
-            $data = $this->service->updateProductImage(
-                data:$request
-            );
         }catch(Exception $e){
             throw $e;
         }

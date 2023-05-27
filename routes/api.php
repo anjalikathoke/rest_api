@@ -26,7 +26,7 @@ use App\Http\Controllers\ProductImageController;
  });*/
 
 Route::resource('customer',CustomerController::class);
-Route::resource('product',ProductController::class);
+
 Route::resource('order',OrderController::class);
 Route::get('product-images/{id}',[ProductImageController::class,'index']);
 Route::get('product-image/{id}',[ProductImageController::class,'show']);
@@ -34,8 +34,6 @@ Route::post('product-image-add/{id}',[ProductImageController::class,'store']);
 Route::post('product-image-update/{id}',[ProductImageController::class,'update']);
 Route::post('product-image-delete/{id}',[ProductImageController::class,'destroy']);
 
-Route::patch('order/update-status/{id}',[OrderController::class,'update_status']);
-Route::patch('order/update-shipping-date/{id}',[OrderController::class,'update_shipping_date']);
 Route::get('customer-order/{id}',[CustomerController::class,'customer_order']);
 
 Route::post('product/add-image',[ProductController::class,'add_product_image']);
@@ -63,6 +61,11 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('edit-profile', [AuthController::class, 'edit_profile']);
     Route::post('change-password', [AuthController::class, 'change_password']);
+
+    Route::resource('product',ProductController::class);
+
+    Route::patch('order/update-status/{id}',[OrderController::class,'update_status']);
+    Route::patch('order/update-shipping-date/{id}',[OrderController::class,'update_shipping_date']);
 });
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
