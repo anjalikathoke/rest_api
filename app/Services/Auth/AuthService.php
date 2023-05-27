@@ -7,6 +7,7 @@ use App\Http\Resources\User\UserResource;
 use App\Repositories\Auth\AuthRepository;
 use App\Http\Requests\Auth\AuthDtoRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Requests\Auth\AuthUpdateDtoRequest;
 use App\Http\Requests\Auth\AuthRegisterDtoRequest;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Http\Requests\Auth\AuthChangePasswordDtoRequest;
@@ -125,11 +126,11 @@ class AuthService
     /**
      * edit profile function
      *
-     * @param AuthRegisterDtoRequest $data
+     * @param AuthUpdateDtoRequest $data
      * @param int $id
      * @return array
      */
-    public function update(AuthRegisterDtoRequest $data){
+    public function update(AuthUpdateDtoRequest $data){
 
         try{
             return  new UserResource($this->repository->update($data));

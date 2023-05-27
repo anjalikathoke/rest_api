@@ -6,6 +6,7 @@ use Exception;
 use App\Models\User;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Requests\Auth\AuthUpdateDtoRequest;
 use App\Http\Requests\Auth\AuthRegisterDtoRequest;
 use App\Repositories\Auth\Interface\AuthRepositoryInterface;
 
@@ -32,13 +33,13 @@ class AuthRepository implements AuthRepositoryInterface
 
     /**
      * Update a Customer
-     * @param AuthRegisterDtoRequest $data
+     * @param AuthUpdateDtoRequest $data
      *
      * @param int $id
      *
      * @return Array
      */
-    public function update(AuthRegisterDtoRequest $data)
+    public function update(AuthUpdateDtoRequest $data)
     {
         if (empty($data)) {
             throw new Exception;

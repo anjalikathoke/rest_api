@@ -123,14 +123,20 @@ class ProductRepository implements ProductRepositoryInterface
             $result = $product->update($details);
 
             if($data->hasFile('productImage') && isset($details['productImage']) && $product->productImage){
-                //$folderPath = Storage::disk('public_products');
-                $folderPath= Storage::disk('s3_images');
 
-                $imageName = basename($product->productImage);
+               $imageName = basename($product->productImage);
 
-                $folderPath->delete($imageName);
+               if(Storage::disk('s3_thumbnail_images')->exists('small_'.$imageName)){
+                    Storage::disk('s3_thumbnail_images')->delete('small_'.$imageName);
+               }
+               if(Storage::disk('s3_thumbnail_images')->exists('medium_'.$imageName)){
+                    Storage::disk('s3_thumbnail_images')->delete('medium_'.$imageName);
+               }
+               if(Storage::disk('s3_images')->exists($imageName)){
+                    Storage::disk('s3_images')->delete($imageName);
+               }
 
-                Redis::setex("product_image:$id", 60*60*2 ,$details['productImage']);
+               Redis::setex("product_image:$id", 60*60*2 ,$details['productImage']);
             }
 
             //to cache updated product details and price
@@ -157,12 +163,18 @@ class ProductRepository implements ProductRepositoryInterface
         try{
             if($result = $product->delete()){
                 if($product->productImage){
-                    //$folderPath = Storage::disk('public_products');
-                    $folderPath= Storage::disk('s3_images');
 
                     $imageName = basename($product->productImage);
 
-                    $folderPath->delete($imageName);
+                    if(Storage::disk('s3_thumbnail_images')->exists('small_'.$imageName)){
+                        Storage::disk('s3_thumbnail_images')->delete('small_'.$imageName);
+                    }
+                    if(Storage::disk('s3_thumbnail_images')->exists('medium_'.$imageName)){
+                        Storage::disk('s3_thumbnail_images')->delete('medium_'.$imageName);
+                    }
+                    if(Storage::disk('s3_images')->exists($imageName)){
+                        Storage::disk('s3_images')->delete($imageName);
+                    }
 
                     Redis::del("product_image:$id");
                 }
