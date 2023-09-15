@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "82889161-7e8e-46c2-b6d4-6e8948f3199e",
+		"name": "Order",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27112748"
+	},
+	"item": [
+		{
+			"name": "http://localhost/api/order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerNumber\" :\"506\",\r\n    \"orderDetail\" : [\r\n                    {\r\n                     \"productNumber\":406,\r\n                     \"quantityOrdered\":2\r\n                    },\r\n                    {\r\n                     \"productNumber\":402,\r\n                     \"quantityOrdered\":5\r\n                    },\r\n                    {\r\n                     \"productNumber\":405, \r\n                     \"quantityOrdered\":6\r\n                    }\r\n                ]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				},
+				"description": "Customer Add"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"productName\" :\"Test Product\",\"productDescription\" : \"Test sdfsdf sdfsdfsdf\",\"quantityInStock\" : \"100\",\"buyPrice\":\"550\",\"MSRP\":\"600\",\"productScale\":\"ewrw\",\"productVendor\":\"TestVendeor\",\"productLine\":\"ghfgh\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order/502",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order",
+						"502"
+					]
+				},
+				"description": "Customer Update"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order/221",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order",
+						"221"
+					]
+				},
+				"description": "Customer view"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order",
+						"6"
+					]
+				},
+				"description": "Customer Delete"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/order-status",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"status\" :\"Ordered\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order/update-status/106",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order",
+						"update-status",
+						"106"
+					]
+				},
+				"description": "update order status"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/update-shipping-date",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"shippedDate\" :\"2023-05-25\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/order/update-shipping-date/227",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"order",
+						"update-shipping-date",
+						"227"
+					],
+					"query": [
+						{
+							"key": "shippedDate",
+							"value": "2023-05-20",
+							"disabled": true
+						}
+					]
+				},
+				"description": "update shipping date"
+			},
+			"response": []
+		}
+	]
+}

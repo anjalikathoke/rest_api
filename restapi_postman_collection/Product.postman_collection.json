@@ -1,0 +1,541 @@
+{
+	"info": {
+		"_postman_id": "bc812f0a-21b7-4f83-9b02-b86fd5487629",
+		"name": "Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27112748"
+	},
+	"item": [
+		{
+			"name": "http://localhost/api/product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTY4NTE4NjA1NCwiZXhwIjoxNjg1MTg5NjU0LCJuYmYiOjE2ODUxODYwNTQsImp0aSI6IjB6VGt3R1lwWnJ0cDJyaGkiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hNg3wC3XEANzmv_zEWtTFIM2Pn-lbBFkdxQ90O5iREY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productName",
+							"value": "XYZ Product",
+							"type": "text"
+						},
+						{
+							"key": "productDescription",
+							"value": "XYZ sdfsdf sdfsdfsdf",
+							"type": "text"
+						},
+						{
+							"key": "quantityInStock",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "buyPrice",
+							"value": "400",
+							"type": "text"
+						},
+						{
+							"key": "MSRP",
+							"value": "500",
+							"type": "text"
+						},
+						{
+							"key": "productScale",
+							"value": "ewrd",
+							"type": "text"
+						},
+						{
+							"key": "productVendor",
+							"value": "TestVendeor",
+							"type": "text"
+						},
+						{
+							"key": "productLine",
+							"value": "ghfgh",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Anjali Kathoke/Pictures/Saved Pictures/perfume.jfif"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product"
+					]
+				},
+				"description": "Customer Add"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTY4NTE4NjA1NCwiZXhwIjoxNjg1MTg5NjU0LCJuYmYiOjE2ODUxODYwNTQsImp0aSI6IjB6VGt3R1lwWnJ0cDJyaGkiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hNg3wC3XEANzmv_zEWtTFIM2Pn-lbBFkdxQ90O5iREY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productName",
+							"value": "ddd Product",
+							"type": "text"
+						},
+						{
+							"key": "productDescription",
+							"value": "ddd sdfsdf sdfsdfsdf",
+							"type": "text"
+						},
+						{
+							"key": "quantityInStock",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "buyPrice",
+							"value": "550",
+							"type": "text"
+						},
+						{
+							"key": "MSRP",
+							"value": "600",
+							"type": "text"
+						},
+						{
+							"key": "productScale",
+							"value": "ewrd",
+							"type": "text"
+						},
+						{
+							"key": "productVendor",
+							"value": "TestVendeor",
+							"type": "text"
+						},
+						{
+							"key": "productLine",
+							"value": "ghfgh",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Anjali Kathoke/Pictures/Saved Pictures/images2.jfif"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/product/201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product",
+						"201"
+					]
+				},
+				"description": "Customer Update"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/product/200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product",
+						"200"
+					]
+				},
+				"description": "Customer view"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/product/500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product",
+						"500"
+					]
+				},
+				"description": "Customer Delete"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/get-product-visits",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/get-product-visits/256",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"get-product-visits",
+						"256"
+					]
+				},
+				"description": "get product visits count"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/get-product-price",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"contactFirstName\" :\"PQR\",\"contactLastName\" : \"XYZ\",\"phone\" : \"01234567890\",\"addressLine1\":\"test address\",\"addressLine2\":\"Near ABC\",\"city\":\"Nagpur\",\"state\":\"Maharashtra\",\"postalCode\":\"440022\",\"country\":\"India\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/get-product-price/201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"get-product-price",
+						"201"
+					]
+				},
+				"description": "get product price by product id"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product/delete-image",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productNumber",
+							"value": "201",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Anjali Kathoke/Pictures/Saved Pictures/istockphoto-470939714-612x612.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/api/product/delete-image/502",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product",
+						"delete-image",
+						"502"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/api/product/search",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"keyword\" :\"sum\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/product/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"product",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
