@@ -29,7 +29,6 @@ class OrderService
 
     public function findAll()
     {
-        cache()->set('name', 'Welcome');
         try{
            return OrderResource::collection($this->repository->findAll());
         }catch(Exception $e){
