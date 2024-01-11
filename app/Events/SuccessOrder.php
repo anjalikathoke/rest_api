@@ -21,10 +21,9 @@ class SuccessOrder
     /**
      * Create a new event instance.
      */
-    public function __construct(Order $order)
+    public function __construct($order)
     {
         $this->order = $order;
-        //dd('innnnnnnn');
     }
 
     /**

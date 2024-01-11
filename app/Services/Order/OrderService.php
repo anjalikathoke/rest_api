@@ -4,6 +4,7 @@ namespace App\Services\Order;
 
 use Exception;
 
+use App\Events\SuccessOrder;
 use App\Http\Resources\Order\OrderResource;
 use App\Repositories\Order\OrderRepository;
 use App\Http\Requests\Order\OrderDtoRequest;
@@ -99,7 +100,18 @@ class OrderService
      */
     public function updateStatus(OrderStatusDtoRequest $data,int $id){
         try{
-           return $this->repository->updateStatus($data,$id);
+           $this->repository->updateStatus($data,$id);
+
+           //dispatch event to update product quantity and notification
+           /*
+           $order = new OrderResource($this->repository->findById($id));
+
+           SuccessOrder::dispatch(
+                $order
+            );*/
+
+            return true;
+
         }catch(Exception $e){
             throw $e;
         }
