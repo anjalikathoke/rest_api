@@ -102,13 +102,15 @@ class OrderService
         try{
            $this->repository->updateStatus($data,$id);
 
+
            //dispatch event to update product quantity and notification
            /*
            $order = new OrderResource($this->repository->findById($id));
 
            SuccessOrder::dispatch(
                 $order
-            );*/
+            );
+            */
 
             return true;
 
